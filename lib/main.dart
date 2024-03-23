@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "onboard.dart";
 
 void taskEmptyErr(BuildContext context) {
   showDialog(
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TodoListScreen(),
+      home: OnboardingScreen(),
     );
   }
 }
