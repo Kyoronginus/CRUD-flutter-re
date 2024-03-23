@@ -45,9 +45,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.yellow, Colors.blue],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+                    colors: [Colors.yellow, Colors.red],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
                   ),
                 ),
                 child: const Center(
@@ -65,11 +65,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.blueAccent,
-                      Color.fromARGB(255, 228, 97, 26)
+                      Colors.red,
+                      Colors.purple,
                     ],
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
                   ),
                 ),
                 child: const Center(
@@ -87,11 +87,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.green[500]!,
-                      Color.fromARGB(255, 239, 9, 120)
+                      Colors.purple,
+                      Colors.blue,
                     ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
                   ),
                 ),
                 child: const Center(
