@@ -96,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 child: const Center(
                   child: Text(
-                    "Press Arrow Button to Continue",
+                    "Press Arrow Button to Continue!",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
