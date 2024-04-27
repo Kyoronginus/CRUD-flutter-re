@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:basic_crud_todolist/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+void updateIsVisited(int value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setInt('_isVisited', value);
+}
 class OnboardingScreen extends StatefulWidget {
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
@@ -52,7 +57,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 child: const Center(
                   child: Text(
-                    "Welcome to My First Project on Flutter!",
+                    "Halo bang",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -84,7 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
                       Colors.purple,
@@ -96,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 child: const Center(
                   child: Text(
-                    "Press Arrow Button to Continue",
+                    "Press Arrow Button to Continue!",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -117,11 +122,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
         ],
       ),
-
-
       floatingActionButton: _currentPageIndex == 2
           ? FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
+                updateIsVisited(1);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => TodoListScreen()),

@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
-import "onboard.dart";
+import 'onboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+int _isVisited = 0;
+
+void updateIsVisited(int value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setInt('_isVisited', value);
+}
+
+Future<int> getIsVisited() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getInt('_isVisited') ?? 0;
+}
 
 void taskEmptyErr(BuildContext context) {
   showDialog(
@@ -21,7 +34,9 @@ void taskEmptyErr(BuildContext context) {
   );
 }
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  _isVisited = await getIsVisited();
   runApp(MyApp());
 }
 
@@ -30,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnboardingScreen(),
+      home: _isVisited == 0 ? OnboardingScreen() : TodoListScreen(),
     );
   }
 }
@@ -42,7 +57,6 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen> {
   List<Map<String, String>> tasks = [];
-  get value => null;
 
   void addTask(String task, String description) {
     setState(() {
@@ -78,13 +92,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
         itemBuilder: (context, index) {
           if (tasks.isEmpty) {
             return const Center(
-              
               child: Align(
                 child: Text(
-                  "Nothing to see here!",
+                  "Nothing to see here",
                   style: TextStyle(
                     fontSize: 20,
-                  
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -100,7 +112,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
               ),
               onTap: () {
                 String? editedTask = tasks[index]["task"];
-                String? editedDescription = tasks[index]["description"] ?? '';
+                String? editedDescription =
+                    tasks[index]["description"] ?? '';
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -113,8 +126,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
                             onChanged: (value) {
                               editedTask = value;
                             },
-                            controller: TextEditingController(
-                                text: tasks[index]['task']),
+                            controller:
+                                TextEditingController(text: tasks[index]['task']),
                             autofocus: true,
                             decoration: InputDecoration(labelText: 'Task Name'),
                           ),
@@ -124,8 +137,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                             },
                             controller: TextEditingController(
                                 text: tasks[index]['description']),
-                            decoration:
-                                InputDecoration(labelText: 'Description'),
+                            decoration: InputDecoration(labelText: 'Description'),
                           ),
                         ],
                       ),
