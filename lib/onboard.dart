@@ -57,7 +57,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 child: const Center(
                   child: Text(
-                    "Halo bang",
+                    "Hello There",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
